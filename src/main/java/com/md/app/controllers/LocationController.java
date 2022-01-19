@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.md.app.dtos.LocationDtoResponse;
 import com.md.app.models.Location;
 import com.md.app.services.LocationService;
 
@@ -20,9 +21,15 @@ public class LocationController {
 	@Autowired
 	private LocationService service;
 	
+	@GetMapping("/full/{id}")	
+	public ResponseEntity<?> findByIdFull(@Valid @PathVariable Integer id) {		
+		Location result = service.findByIdFull(id);
+		return ResponseEntity.status(HttpStatus.FOUND).body(result);
+	}
+	
 	@GetMapping("/{id}")	
 	public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {		
-		Location result = service.findById(id);
+		LocationDtoResponse result = service.findById(id);
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
 

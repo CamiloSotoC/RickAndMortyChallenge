@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.md.app.dtos.CharacterDtoResponse;
 import com.md.app.models.Character;
 import com.md.app.services.CharacterService;
 
@@ -19,10 +20,16 @@ public class CharacterController {
 	
 	@Autowired
 	private CharacterService service;
+	
+	@GetMapping("/full/{id}")	
+	public ResponseEntity<?> findByIdFull(@Valid @PathVariable Integer id) {		
+		Character result = service.findByIdFull(id);
+		return ResponseEntity.status(HttpStatus.FOUND).body(result);
+	}
 			
 	@GetMapping("/{id}")	
 	public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {		
-		Character result = service.findById(id);
+		CharacterDtoResponse result = service.findById(id);
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
 
