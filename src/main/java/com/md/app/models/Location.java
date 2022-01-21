@@ -20,4 +20,11 @@ public class Location {
 	private String url;
 	private Timestamp created;
 	
+	
+	public void setIdByUrl() {
+		if(!url.isBlank()) {			
+			String[] urlArray = url.split("/");
+			setId(Integer.parseInt(urlArray[urlArray.length-1]));			
+		}				
+	}
 }
