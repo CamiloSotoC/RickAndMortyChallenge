@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.md.app.dtos.CharacterDtoResponse;
 import com.md.app.dtos.LocationDtoResponse;
+import com.md.app.interfaces.CharacterRepositoryInterface;
 import com.md.app.interfaces.LocationRepositoryInterface;
 import com.md.app.models.Character;
 import com.md.app.models.Location;
@@ -15,27 +16,28 @@ public class LocationService {
 	
 	@Autowired
 	private LocationRepositoryInterface repository;
-	@Autowired
-	private ModelMapper modelMapper;
+	//@Autowired
+	//private ModelMapper modelMapper;
+
 		
-	public Location findByIdFull(Integer id) {		
-		return repository.findById(id);
-	}
-	
-	public Location findByUrlFull(String url) {		
+	public Location findByUrl(String url) {
 		return repository.findByUrl(url);
 	}
-		
-	public LocationDtoResponse findById(Integer id) {
-		Location location = repository.findById(id);
-		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
-		return locationDto;		
-	}
-	
-	public LocationDtoResponse findByUrl(String url) {
+
+	/*public LocationDtoResponse findByUrlDto(String url) {
 		Location location = repository.findByUrl(url);
 		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
 		return locationDto;		
 	}
+	
+	public Location findById(Integer id) {
+		return repository.findById(id);
+	}
+	
+	public LocationDtoResponse findByIdDto(Integer id) {
+		Location location = repository.findById(id);
+		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
+		return locationDto;		
+	}*/
 
 }

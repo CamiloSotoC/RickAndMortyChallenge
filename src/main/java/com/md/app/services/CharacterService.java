@@ -1,6 +1,7 @@
 package com.md.app.services;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.asm.Advice.This;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import com.md.app.interfaces.CharacterRepositoryInterface;
 import com.md.app.models.Character;
 
 @Service
-public class CharacterService{
+public class CharacterService {
 	
 	@Autowired
 	private CharacterRepositoryInterface repository;
@@ -17,21 +18,22 @@ public class CharacterService{
 	private LocationService locationService;
 	@Autowired
 	private ModelMapper modelMapper;
-	
-	public Character findByIdFull(Integer id) {		
-		Character result = repository.findById(id);		
-		result.setOrigin(locationService.findByUrlFull(result.getOrigin().getUrl()));
-		result.setLocation(locationService.findByUrlFull(result.getLocation().getUrl()));
-		return result;
+		
+	public Character findById(Integer id) {
+		Character character = repository.findById(id);		
+		character.setOrigin(locationService.findByUrl(character.getOrigin().getUrl()));
+		character.setLocation(locationService.findByUrl(character.getLocation().getUrl()));
+		return character;
 	}
 	
-	public CharacterDtoResponse findById(Integer id) {
-		Character character = repository.findById(id);
+	public CharacterDtoResponse findByIdDto(Integer id) {
+		Character character = findById(id);		
 		CharacterDtoResponse characterDto = modelMapper.map(character, CharacterDtoResponse.class);
-		characterDto.setOrigin(locationService.findByUrl(characterDto.getOrigin().getUrl()));
 		characterDto.setEpisode_count(character.getEpisode().size());
 		return characterDto;
 	}
+
+	
 	
 	
 
