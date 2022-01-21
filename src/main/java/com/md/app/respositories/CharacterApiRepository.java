@@ -18,14 +18,10 @@ public class CharacterApiRepository implements CharacterRepositoryInterface {
 
 	@Override
 	public Character findById(Integer id) {
-		Character result = restTemplate.getForObject(url+id, Character.class);
+		Character result = restTemplate.getForObject(url+id, Character.class);		
+		result.getOrigin().setIdByUrl();		
+		result.getLocation().setIdByUrl();
 		return result;		
 	}
-	
-	@Override
-	public Character findByUrl(String url) {		
-		Character result = restTemplate.getForObject(url, Character.class);
-		return result;		
-	}	
 
 }

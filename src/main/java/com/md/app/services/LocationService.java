@@ -16,20 +16,13 @@ public class LocationService {
 	
 	@Autowired
 	private LocationRepositoryInterface repository;
-	//@Autowired
-	//private ModelMapper modelMapper;
+	@Autowired
+	private ModelMapper modelMapper;
 
 		
 	public Location findByUrl(String url) {
 		return repository.findByUrl(url);
 	}
-
-	/*public LocationDtoResponse findByUrlDto(String url) {
-		Location location = repository.findByUrl(url);
-		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
-		return locationDto;		
-	}
-	
 	public Location findById(Integer id) {
 		return repository.findById(id);
 	}
@@ -38,6 +31,7 @@ public class LocationService {
 		Location location = repository.findById(id);
 		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
 		return locationDto;		
-	}*/
+	}
+
 
 }

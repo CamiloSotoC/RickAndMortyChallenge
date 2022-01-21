@@ -20,16 +20,16 @@ public class LocationController {
 	
 	@Autowired
 	private LocationService service;
+		
+	@GetMapping("/{id}")	
+	public ResponseEntity<?> findByIdDto(@Valid @PathVariable Integer id) {		
+		LocationDtoResponse result = service.findByIdDto(id);
+		return ResponseEntity.status(HttpStatus.FOUND).body(result);
+	}
 	
 	/*@GetMapping("/full/{id}")	
 	public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {		
 		Location result = service.findById(id);
-		return ResponseEntity.status(HttpStatus.FOUND).body(result);
-	}
-	
-	@GetMapping("/{id}")	
-	public ResponseEntity<?> findByIdDto(@Valid @PathVariable Integer id) {		
-		LocationDtoResponse result = service.findByIdDto(id);
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}*/
 

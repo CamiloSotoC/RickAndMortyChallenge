@@ -23,7 +23,7 @@ public class CharacterController {
 	
 	@GetMapping("/full/{id}")	
 	public ResponseEntity<?> findByIdFull(@Valid @PathVariable Integer id) {		
-		Character result = service.findById(id);
+		Character result = service.findByIdFull(id);
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
 			
