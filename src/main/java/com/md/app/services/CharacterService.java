@@ -20,21 +20,31 @@ public class CharacterService {
 	private ModelMapper modelMapper;
 		
 	public Character findById(Integer id) {
-		Character character = repository.findById(id);		
-		character.setOrigin(locationService.findByUrl(character.getOrigin().getUrl()));
-		character.setLocation(locationService.findByUrl(character.getLocation().getUrl()));
+		Character character = repository.findById(id);
 		return character;
 	}
 	
 	public CharacterDtoResponse findByIdDto(Integer id) {
-		Character character = findById(id);		
+		System.out.println(id);
+		Character character = findById(id);
+	
+		if(character.getOrigin().getId() != null)	character.setOrigin(locationService.findById(character.getOrigin().getId()));		
+		if(character.getLocation().getId() !=null)	character.setLocation(locationService.findById(character.getLocation().getId()));		
 		CharacterDtoResponse characterDto = modelMapper.map(character, CharacterDtoResponse.class);
 		characterDto.setEpisode_count(character.getEpisode().size());
+		
 		return characterDto;
 	}
-
 	
-	
-	
+	public Character findByIdFull(Integer id) {
+		Character character = repository.findById(id);
+		
+		//if(!character.getOrigin().getUrl().isBlank())	character.setOrigin(locationService.findByUrl(character.getOrigin().getUrl()));
+		//if(!character.getLocation().getUrl().isBlank())	character.setLocation(locationService.findByUrl(character.getLocation().getUrl()));		
+		if(character.getOrigin().getId() != null)	character.setOrigin(locationService.findById(character.getOrigin().getId()));		
+		if(character.getLocation().getId() !=null)	character.setLocation(locationService.findById(character.getLocation().getId()));
+			
+		return character;
+	}
 
 }
