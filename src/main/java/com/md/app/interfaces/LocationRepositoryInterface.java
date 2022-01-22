@@ -4,8 +4,8 @@ import com.md.app.models.Location;
 
 public interface LocationRepositoryInterface {
 	
-	Location findById(Integer id);
-	Location findByUrl(String url);
+	public Location findById(Integer id);
+	public Location findByUrl(String url);
 	
 
 }

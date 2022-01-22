@@ -4,15 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.md.app.dtos.CharacterDtoResponse;
 import com.md.app.dtos.LocationDtoResponse;
-import com.md.app.interfaces.CharacterRepositoryInterface;
 import com.md.app.interfaces.LocationRepositoryInterface;
-import com.md.app.models.Character;
+import com.md.app.interfaces.LocationServiceInterface;
 import com.md.app.models.Location;
 
 @Service
-public class LocationService {
+public class LocationService implements LocationServiceInterface{
 	
 	@Autowired
 	private LocationRepositoryInterface repository;

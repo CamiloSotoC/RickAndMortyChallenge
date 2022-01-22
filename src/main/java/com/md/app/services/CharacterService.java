@@ -1,16 +1,16 @@
 package com.md.app.services;
 
 import org.modelmapper.ModelMapper;
-import org.modelmapper.internal.bytebuddy.asm.Advice.This;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.md.app.dtos.CharacterDtoResponse;
 import com.md.app.interfaces.CharacterRepositoryInterface;
+import com.md.app.interfaces.CharacterServiceInterface;
 import com.md.app.models.Character;
 
 @Service
-public class CharacterService {
+public class CharacterService implements CharacterServiceInterface {
 	
 	@Autowired
 	private CharacterRepositoryInterface repository;
