@@ -17,11 +17,11 @@ public class CharacterApiRepository implements CharacterRepositoryInterface {
 	private String url;
 
 	@Override
-	public Character findById(Integer id) {
-		Character result = restTemplate.getForObject(url+id, Character.class);		
+	public Character findById(Integer id) {		
+		Character result = restTemplate.getForObject(url+id, Character.class);
 		result.getOrigin().setIdByUrl();		
 		result.getLocation().setIdByUrl();
-		return result;		
+		return result;
 	}
 
 }

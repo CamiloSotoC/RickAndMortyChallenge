@@ -18,15 +18,18 @@ public class LocationService implements LocationServiceInterface{
 	private ModelMapper modelMapper;
 
 		
-	public Location findByUrl(String url) {
+	public Location findByUrlRaw(String url) {
 		return repository.findByUrl(url);
 	}
-	public Location findById(Integer id) {
+	
+	public Location findByIdRaw(Integer id) {
 		return repository.findById(id);
 	}
 	
 	public LocationDtoResponse findByIdDto(Integer id) {
 		Location location = repository.findById(id);
+		if(location == null)
+			return null;
 		LocationDtoResponse locationDto = modelMapper.map(location, LocationDtoResponse.class);
 		return locationDto;		
 	}

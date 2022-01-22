@@ -17,15 +17,13 @@ public class LocationApiRepository implements LocationRepositoryInterface{
 	private String url;
 	
 	@Override
-	public Location findById(Integer id) {		
-		Location result = restTemplate.getForObject(url+id, Location.class);
-		return result;		
+	public Location findById(Integer id) {
+		return restTemplate.getForObject(url+id, Location.class);		
 	}
 	
 	@Override
-	public Location findByUrl(String url) {		
-		Location result = restTemplate.getForObject(url, Location.class);
-		return result;		
+	public Location findByUrl(String url) {
+		return restTemplate.getForObject(url, Location.class);
 	}
 
 }

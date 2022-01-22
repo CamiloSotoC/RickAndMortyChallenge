@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.md.app.dtos.LocationDtoResponse;
 import com.md.app.interfaces.LocationServiceInterface;
+import com.md.app.models.ErrorResponse;
 import com.md.app.models.Location;
-
 
 @RestController
 @RequestMapping("/location")
@@ -21,16 +21,20 @@ public class LocationController {
 	
 	@Autowired
 	private LocationServiceInterface service;
-		
+	
 	@GetMapping("/{id}")	
 	public ResponseEntity<?> findByIdDto(@Valid @PathVariable Integer id) {		
-		LocationDtoResponse result = service.findByIdDto(id);
+		LocationDtoResponse result = service.findByIdDto(id);		
+		if(result == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Character not found"));		
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
 	
-	@GetMapping("/full/{id}")	
-	public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {		
-		Location result = service.findById(id);
+	@GetMapping("/raw/{id}")	
+	public ResponseEntity<?> findByIdRaw(@Valid @PathVariable Integer id) {		
+		Location result = service.findByIdRaw(id);
+		if(result == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Character not found"));		
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
 

@@ -5,8 +5,8 @@ import com.md.app.models.Location;
 
 public interface LocationServiceInterface {
 
-	public Location findByUrl(String url) ;	
-	public Location findById(Integer id);	
+	public Location findByUrlRaw(String url) ;	
+	public Location findByIdRaw(Integer id);	
 	public LocationDtoResponse findByIdDto(Integer id);
 	
 }

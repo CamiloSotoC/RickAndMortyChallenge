@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.md.app.dtos.CharacterDtoResponse;
 import com.md.app.interfaces.CharacterServiceInterface;
 import com.md.app.models.Character;
-import com.md.app.services.CharacterService;
+import com.md.app.models.ErrorResponse;
 
 @RestController
 @RequestMapping("/character")
@@ -22,16 +22,21 @@ public class CharacterController {
 	@Autowired
 	private CharacterServiceInterface service;
 	
-	@GetMapping("/full/{id}")	
-	public ResponseEntity<?> findByIdFull(@Valid @PathVariable Integer id) {		
-		Character result = service.findByIdFull(id);
-		return ResponseEntity.status(HttpStatus.FOUND).body(result);
-	}
-			
 	@GetMapping("/{id}")	
 	public ResponseEntity<?> findById(@Valid @PathVariable Integer id) {		
 		CharacterDtoResponse result = service.findByIdDto(id);
+		if(result == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Character not found"));		
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
+	
+	@GetMapping("/raw/{id}")	
+	public ResponseEntity<?> findByIdRaw(@Valid @PathVariable Integer id) {		
+		Character result = service.findByIdRaw(id);
+		if(result == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Character not found"));		
+		return ResponseEntity.status(HttpStatus.FOUND).body(result);
+	}
+	
 
 }
